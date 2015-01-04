@@ -1,0 +1,49 @@
+html, body {
+	background-color: black;
+	color: white;
+	margin:0;
+	padding:0;
+}
+
+#top {
+	width: 1000px;
+	height: 704px;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	text-align: left;
+	padding-top:3%;
+}
+
+#inputs {
+	width: 150px;
+	float: right;
+	overflow: hidden;
+}
+
+#pencil {
+	height: 70px;
+	width: 257px;
+}
+
+#pencils {
+	width: 150px;
+	float: left;
+	overflow: hidden;
+}
+
+#myCanvas {
+	border:2px solid black; 
+	cursor:crosshair;
+	z-index:1; 
+	float:right;
+}
+#brushChoose {
+	font-size:18px;
+	padding-left:6px;
+}
+
+#stopka {
+	padding-left:6px;
+	padding-top:300px;
+}

@@ -1,0 +1,88 @@
+﻿<html>
+<head>
+<title>PAINT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="Stylesheet" type="text/css" href="style.css"/>
+</head>
+
+<body>
+<div id="top">
+	<div id="inputs">
+		<p id="brushChoose">Wybierz rozmiar pędzla (1 - 100):</p>
+		<input type="number" onchange="brushSize(this.value)" name="size" min="1" max="100" style="width:145px; height:30px; margin-left:3px;"/>
+		<button type="button" style="width:145px; height:50px; margin-top:50px" onclick="clean()">RYSUJ OD NOWA</button>
+		<p id="stopka">ScriptPaint 1.0<br>Do prawidłowego działania aplikacji zalecane jest używanie najnowszej wersji Google Chrome i rozdzielczości co najmniej 1024x768</p>
+	</div>
+	
+	<div id="pencils">
+		<input type="image" id="pencil" onclick="myf('white')" src="white.bmp"/><br>
+		<input type="image" id="pencil" onclick="myf('black')"  src="black.bmp"/><br>
+		<input type="image" id="pencil" onclick="myf('red')"  src="red.bmp"/><br>
+		<input type="image" id="pencil" onclick="myf('blue')" src="blue.bmp" /><br>
+		<input type="image" id="pencil" onclick="myf('yellow')" src="yellow.bmp" /><br>
+		<input type="image" id="pencil" onclick="myf('brown')" src="brown.bmp" /<br>
+		<input type="image" id="pencil" onclick="myf('green')" src="green.bmp" /><br>
+		<input type="image" id="pencil" onclick="myf('pink')" src="pink.bmp" /><br>
+		<input type="image" id="pencil" onclick="myf('orange')" src="orange.bmp" /><br>
+		<input type="image" id="pencil" onclick="myf('gray')" src="gray.bmp" /><br>
+	</div>
+	
+	<div>
+		<canvas id="myCanvas"></canvas>
+	</div>
+</div>
+
+<script>
+var pozycja = {x:0, y:0}
+var canvas = document.getElementById("myCanvas")
+var c = canvas.getContext("2d")
+canvas.style.position = "fixed"
+canvas.setAttribute("width", "700");
+canvas.setAttribute("height", "700");
+
+c.lineCap = "round"
+c.lineWidth = "5"
+c.strokeStyle = "blue"
+c.lineJoin= "round"
+c.fillStyle = "white"
+c.fillRect(0,0,700,700)
+
+canvas.addEventListener("mousemove", function(){
+	pozycja.x = event.clientX - canvas.offsetLeft - 2;
+	pozycja.y = event.clientY - canvas.offsetTop - document.body.scrollTop  - canvas.scrollTop - 2;
+}, false)
+
+canvas.addEventListener("mousedown", function(){
+	c.beginPath()
+	c.moveTo(pozycja.x,pozycja.y)
+	c.arc(pozycja.x, pozycja.y, 0.1, 0, 2 * Math.PI);
+	c.stroke();
+	canvas.addEventListener("mousemove", rysuj, false)
+},false)
+
+canvas.addEventListener("mouseup", function(){
+	canvas.removeEventListener("mousemove", rysuj, false)
+}, false)
+
+canvas.addEventListener("mouseover", function(){
+	canvas.removeEventListener("mousemove", rysuj, false)
+}, false)
+
+function rysuj() {
+    c.lineTo(pozycja.x, pozycja.y)
+    c.stroke()   
+}
+function clean(){
+c.fillStyle = "white";
+c.fillRect(0,0,700,700);
+}
+function myf(color){
+c.strokeStyle = color
+}
+function brushSize(val){
+c.lineWidth = val
+}
+</script>
+
+</body>
+</html>
