@@ -60,4 +60,6 @@ value_spl (spline_t * spl, double x)
 	+ dx * spl->f1[i]
 	+ dx * dx / 2 *  spl->f2[i] 
 	+ dx * dx * dx / 6 * spl->f3[i];
+
+	free(spl);
 }
